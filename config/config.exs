@@ -10,6 +10,8 @@ import Config
 config :story_weaver,
   ecto_repos: [StoryWeaver.Repo]
 
+config :story_weaver, StoryWeaver.Repo, migration_primary_key: [type: :uuid]
+
 # Configures the endpoint
 config :story_weaver, StoryWeaverWeb.Endpoint,
   url: [host: "localhost"],
