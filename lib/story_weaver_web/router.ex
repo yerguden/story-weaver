@@ -18,6 +18,7 @@ defmodule StoryWeaverWeb.Router do
     pipe_through :browser
 
     # get "/", PageController, :home
+    resources "/stories", StoryController
     live "/", GameLive
   end
 
