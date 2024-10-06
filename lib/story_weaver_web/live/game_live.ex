@@ -1,7 +1,5 @@
 defmodule StoryWeaverWeb.GameLive do
-  # In Phoenix v1.6+ apps, the line is typically: use MyAppWeb, :live_view
-  use Phoenix.LiveView
-  import StoryWeaverWeb.Components
+  use StoryWeaverWeb, :live_view
 
   defmodule Message do
     defstruct [:content, :from]
