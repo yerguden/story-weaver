@@ -21,7 +21,6 @@ defmodule StoryWeaverWeb.Router do
     pipe_through :browser
 
     # get "/", PageController, :home
-    resources "/stories", StoryController
     live "/", GameLive
   end
 
@@ -70,6 +69,14 @@ defmodule StoryWeaverWeb.Router do
       on_mount: [{StoryWeaverWeb.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+
+      # Stories
+      live "/stories", StoryLive.Index, :index
+      live "/stories/new", StoryLive.Index, :new
+      live "/stories/:id/edit", StoryLive.Index, :edit
+
+      live "/stories/:id", StoryLive.Show, :show
+      live "/stories/:id/show/edit", StoryLive.Show, :edit
     end
   end
 
