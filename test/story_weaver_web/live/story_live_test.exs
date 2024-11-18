@@ -92,13 +92,19 @@ defmodule StoryWeaverWeb.StoryLiveTest do
   end
 
   describe "Show" do
-    setup [:register_and_log_in_user, :create_story]
+    setup [:register_and_log_in_user, :create_story, :create_unauthorised_story]
 
     test "displays story", %{conn: conn, story: story} do
       {:ok, _show_live, html} = live(conn, ~p"/stories/#{story}")
 
       assert html =~ "Show Story"
       assert html =~ story.title
+    end
+
+    test "doesn't allow viewing other users' stories", %{conn: conn, other_story: story} do
+      assert_error_sent 404, fn ->
+        live(conn, ~p"/stories/#{story}")
+      end
     end
 
     test "updates story within modal", %{conn: conn, story: story} do
