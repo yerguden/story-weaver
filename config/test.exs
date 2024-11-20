@@ -15,7 +15,7 @@ config :story_weaver, StoryWeaver.Repo,
   database: "story_weaver_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10,
-  port: 5433
+  port: 5432
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
