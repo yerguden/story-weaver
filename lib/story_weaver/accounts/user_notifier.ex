@@ -1,6 +1,7 @@
 defmodule StoryWeaver.Accounts.UserNotifier do
   import Swoosh.Email
 
+  require Logger
   alias StoryWeaver.Mailer
 
   # Delivers the email using the application mailer.
@@ -12,8 +13,14 @@ defmodule StoryWeaver.Accounts.UserNotifier do
       |> subject(subject)
       |> text_body(body)
 
-    with {:ok, _metadata} <- Mailer.deliver(email) do
-      {:ok, email}
+    case Mailer.deliver(email) do
+      {:ok, metadata} ->
+        Logger.info("Email delivered successfully: #{inspect(metadata)}")
+        {:ok, email}
+
+      {:error, reason} ->
+        Logger.error("Failed to deliver email: #{inspect(reason)}")
+        {:error, reason}
     end
   end
 
