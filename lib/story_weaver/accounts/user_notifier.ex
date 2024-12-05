@@ -9,7 +9,7 @@ defmodule StoryWeaver.Accounts.UserNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"StoryWeaver", "contact@example.com"})
+      |> from({"yuko", "storyweaver@tuta.io"})
       |> subject(subject)
       |> text_body(body)
 
